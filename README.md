@@ -1,0 +1,2 @@
+# openMP
+Multihilos en Python
