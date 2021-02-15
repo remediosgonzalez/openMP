@@ -1,0 +1,52 @@
+import numpy as np
+import time
+import sys
+import math
+import threading
+import time
+import queue
+
+start_time = time.time()
+
+num = 10**9
+primos=[]
+
+def es_primo(num,array_primos):
+    #Solo comprobamos impares hasta la raiz de num
+    for i in array_primos:
+        if num%i == 0:
+            return False
+        if i==int(math.sqrt(num))+1:
+            break
+        else:
+            continue
+    return True
+
+
+def set_primos(inicio, fin, array_primos,num_hilo):
+    #Inicializamos array de primos con el 2
+    for i in range(inicio,fin,1):
+        #Si es primo añadimos elemento al array de primos
+        if i > 1:
+            if es_primo(i,array_primos):
+                array_primos.append(i)
+
+def rango_primos(num):
+    array_primos=[2]
+    hilos=4
+    if num > div:
+        rango=int(num/hilos)
+        inicio=0
+        print(rango)
+        for num_hilo in range(hilos):
+            fin = inicio+rango
+            if fin > num:
+                fin = num
+            hilo = threading.Thread(args=(inicio, fin, array_primos,num_hilo),target=set_primos)    
+            hilo.start()
+            hilo.join()
+            inicio = fin
+    return array_primos
+
+
+primos=rango_primos(num)
